@@ -4,18 +4,20 @@ import Home from "./pages/Home";
 import AboutRAS from "./pages/AboutRAS";
 import AboutEvent from "./pages/AboutEvent";
 import Timeline from "./pages/Timeline";
+import Leaderboard from "./pages/Leaderboard";
 
 export default function App() {
   return (
     <Router>
       <Navbar />
       {/* Content padding top to avoid being hidden under fixed navbar */}
-      <div className="pt-32 min-h-screen">
+      <div className="pt-12 min-h-screen">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about-ras" element={<AboutRAS />} />
           <Route path="/about-event" element={<AboutEvent />} />
           <Route path="/timeline" element={<Timeline />} />
+          <Route path="/leaderboard" element={<Leaderboard />} />
         </Routes>
       </div>
     </Router>
