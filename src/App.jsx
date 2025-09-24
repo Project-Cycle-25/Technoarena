@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import AboutRAS from "./pages/AboutRAS";
 import AboutEvent from "./pages/AboutEvent";
 import Timeline from "./pages/Timeline";
+import Leaderboard from "./pages/Leaderboard";
 
 function GooeyNavbar() {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ function GooeyNavbar() {
     { label: "About RAS", onClick: () => navigate("/about-ras") },
     { label: "About Event", onClick: () => navigate("/about-event") },
     { label: "Timeline", onClick: () => navigate("/timeline") },
+    { label: "Leaderboard", onClick: () => navigate("/leader-board")  },
   ];
 
   return (
@@ -57,6 +59,7 @@ export default function App() {
           <Route path="/about-ras" element={<AboutRAS />} />
           <Route path="/about-event" element={<AboutEvent />} />
           <Route path="/timeline" element={<Timeline />} />
+          <Route path="/leader-board" element={<Leaderboard />} />
         </Routes>
       </div>
     </Router>

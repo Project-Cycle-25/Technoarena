@@ -6,6 +6,8 @@ export default function Navbar() {
     { path: "/about-ras", label: "About RAs" },
     { path: "/about-event", label: "About Event" },
     { path: "/timeline", label: "Timeline" },
+    { path: "/leader-board", label: "Leaderboard" },
+    
   ];
 
   return (
