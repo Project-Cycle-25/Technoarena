@@ -1,17 +1,16 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import GooeyNav from "./GooeyNav"; // Adjust path if needed
 
 export default function Navbar() {
-  const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navItems = [
-    { label: "Home", onClick: () => { setMobileMenuOpen(false); navigate("/"); } },
-    // { label: "About RAS", onClick: () => { setMobileMenuOpen(false); navigate("/about-ras"); } },
-    { label: "About Event", onClick: () => { setMobileMenuOpen(false); navigate("/about-event"); } },
-    { label: "Timeline", onClick: () => { setMobileMenuOpen(false); navigate("/timeline"); } },
-    { label: "Leaderboard", onClick: () => { setMobileMenuOpen(false); navigate("/leaderboard"); } },
+    { label: "Home", to: "/" },
+    // { label: "About RAS", to: "/about-ras" },
+    { label: "About Event", to: "/about-event" },
+    { label: "Timeline", to: "/timeline" },
+    { label: "Leaderboard", to: "/leaderboard" },
   ];
 
   // Common transparent/glass effect style
@@ -30,7 +29,16 @@ export default function Navbar() {
         <div className="flex justify-center pt-4">
           <div className="p-3 rounded-2xl" style={glassStyle}>
             <GooeyNav
-              items={navItems}
+              items={navItems.map(item => ({
+                label: (
+                  <Link
+                    to={item.to}
+                    className="text-white px-3 py-2 hover:text-gray-300"
+                  >
+                    {item.label}
+                  </Link>
+                ),
+              }))}
               particleCount={15}
               particleDistances={[80, 15]}
               particleR={90}
@@ -44,7 +52,6 @@ export default function Navbar() {
       </div>
 
       {/* Mobile navbar */}
-      // Mobile navbar
       <header
         className="md:hidden fixed top-0 left-0 w-full z-50 flex items-center px-4 h-12"
         style={{
@@ -68,7 +75,11 @@ export default function Navbar() {
               stroke="currentColor"
               strokeWidth={2}
             >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 18L18 6M6 6l12 12"
+              />
             </svg>
           ) : (
             <svg
@@ -79,7 +90,11 @@ export default function Navbar() {
               stroke="currentColor"
               strokeWidth={2}
             >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
             </svg>
           )}
         </button>
@@ -87,15 +102,19 @@ export default function Navbar() {
 
       {/* Mobile dropdown menu */}
       {mobileMenuOpen && (
-        <nav className="md:hidden fixed top-12 left-0 w-full z-40 flex flex-col p-2 space-y-1" style={glassStyle}>
+        <nav
+          className="md:hidden fixed top-12 left-0 w-full z-40 flex flex-col p-2 space-y-1"
+          style={glassStyle}
+        >
           {navItems.map((item, index) => (
-            <button
+            <Link
               key={index}
-              onClick={item.onClick}
+              to={item.to}
+              onClick={() => setMobileMenuOpen(false)}
               className="text-white py-3 px-4 rounded hover:bg-black hover:text-white text-left text-base"
             >
               {item.label}
-            </button>
+            </Link>
           ))}
         </nav>
       )}
